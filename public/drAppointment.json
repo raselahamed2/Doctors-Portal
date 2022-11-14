@@ -69,6 +69,12 @@
       "_id": 4,
       "name": "Cavity Protection",
       "slots": [
+      ]
+    },
+    {
+      "_id": 5,
+      "name": "Pediatric Dental",
+      "slots": [
         "08.00 AM - 08.30 AM",
         "08.30 AM - 09.00 AM",
         "09.00 AM - 9.30 AM",
@@ -85,12 +91,6 @@
         "3.30 PM - 4.00 PM",
         "4.00 PM - 4.30 PM",
         "4.30 PM - 5.00 PM"
-      ]
-    },
-    {
-      "_id": 5,
-      "name": "Pediatric Dental",
-      "slots": [
       ]
     },
     {
