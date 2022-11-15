@@ -3,15 +3,23 @@ import {Link} from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const NavBar = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(() => {})
+        .catch(e => console.error(e))
+    }
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
-        <li><Link to='/review'>Reviews</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         { user?.uid ?  
-        <li><Link to='/login'>Sign Out</Link></li> 
+        <>
+        <li><Link to='/dashboard'>Dashboard</Link></li> 
+        <li><button onClick={handleLogOut}>Sign Out</button></li> 
+        </>
         : <li><Link to='/login'>Login</Link></li>}
     </>
 

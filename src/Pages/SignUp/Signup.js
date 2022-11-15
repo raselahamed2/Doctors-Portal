@@ -1,18 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Signup = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const {createUser} = useContext(AuthContext)
+    const {createUser, updateUser} = useContext(AuthContext)
+    const [signUpError, setSignUpError] = useState('')
 
     const handleSignup = (data) =>{
         console.log(data);
+        setSignUpError('')
         createUser(data.email, data.password)
         .then(result => {
             const user = result.user;
             console.log(user);
+            toast("User sign in successfully")
+
+            const userInfo = {
+                displayName: data.name
+            }
+            updateUser(userInfo)
+            .then(() => {})
+            .catch(e => 
+                {console.error(e.message)
+                setSignUpError(e.message)
+            })
         })
         .catch(error => console.error(error))
     }
@@ -47,6 +61,7 @@ const Signup = () => {
                     <label className="label ml-2 mt-3">
                         <span className="label-text">Forgot Password ?</span>
                     </label>
+                    {signUpError && <p>{signUpError}</p>}
                 </div>
                 <input className=' btn btn-accent w-full mb-5' type="submit" value='Sign Up' />
                 <h1 className='ml-6 mb-4'> Doctors Portal? <Link className='text-primary' to='/login'>Login your account</Link></h1>
