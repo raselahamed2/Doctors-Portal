@@ -1,13 +1,20 @@
-import { data } from 'autoprefixer';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Signup = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const {createUser} = useContext(AuthContext)
 
-    const handleSignup = data =>{
+    const handleSignup = (data) =>{
         console.log(data);
+        createUser(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
     }
 
     return (
@@ -36,7 +43,7 @@ const Signup = () => {
                     {required: 'password is required',
                     minLength: {value: 6, message : 'password min 6 chereactars'}
                     })} className="input input-bordered w-full" placeholder="Your Password" />
-                    {errors.Password && <p className='text-red-500'>{errors.Password.message}</p>}
+                    {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     <label className="label ml-2 mt-3">
                         <span className="label-text">Forgot Password ?</span>
                     </label>
