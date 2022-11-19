@@ -8,8 +8,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app)
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null)
-
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) =>{
@@ -23,16 +22,12 @@ const AuthProvider = ({children}) => {
     }
 
     const updateUser = (userInfo) =>{
-        return updateProfile(user, userInfo)
+        return updateProfile(auth.currentUser, userInfo)
     }
 
     const logOut = () => {
         setLoading(true)
         signOut(auth)
-    }
-
-    const signInGoogle = () => {
-        return 
     }
 
     useEffect( () => {

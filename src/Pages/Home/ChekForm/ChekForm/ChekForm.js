@@ -11,7 +11,7 @@ const ChekForm = () => {
             <br />
             <input type="subjuct" placeholder="Subjuct" className="input input-bordered input-primary w-full max-w-xl mt-4" />
             <br />
-            <input type="text" placeholder="Type here" className="input input-bordered input-lg h-44 w-full max-w-xl mt-5" />
+            <input type="text" className="input input-bordered input-lg h-44 w-full max-w-xl mt-5" />
             </div>
             <button className="btn btn-active btn-secondary text-white mt-8 px-10">Submit</button>
         </div>

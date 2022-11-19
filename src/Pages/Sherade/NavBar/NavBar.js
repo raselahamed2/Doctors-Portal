@@ -21,6 +21,7 @@ const NavBar = () => {
         <li><button onClick={handleLogOut}>Sign Out</button></li> 
         </>
         : <li><Link to='/login'>Login</Link></li>}
+        {/* <input type="checkbox" className="toggle toggle-success mt-4" checked /> */}
     </>
 
     return (
