@@ -2,7 +2,6 @@ import React from 'react';
 
 
 const BannerCard = ({ card }) => {
-    console.log(card);
     const { name, description, bgClass, icon } = card;
     return (
         <div >

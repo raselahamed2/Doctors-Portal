@@ -3,12 +3,13 @@ import { format } from 'date-fns';
 import AppointmantOption from './AppointmantOption';
 import BookingModal from '../BookingModal/BookingModal';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Sherade/Loading/Loading';
 
 const AvalibaleAppointment = ({selectedDate}) => {
     const [treatmant, setTreatment] = useState(null)
     const date = format(selectedDate, 'PP')
 
-    const {data : appointmentOption = [], refetch} = useQuery({
+    const {data : appointmentOption = [], refetch, isLoading} = useQuery({
         queryKey: ['appointmentOption', date],
         queryFn: async() => {
             const res = await fetch(`http://localhost:5000/appointmentOption?date=${date}`)
@@ -16,6 +17,9 @@ const AvalibaleAppointment = ({selectedDate}) => {
             return data
         }
     })
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     // useEffect( () =>{
     //     fetch('http://localhost:5000/appointmentOption')
