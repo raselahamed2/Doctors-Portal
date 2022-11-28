@@ -1,6 +1,6 @@
-import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const MyAppoinment = () => {
@@ -21,9 +21,7 @@ const MyAppoinment = () => {
             return data;
         }
     })
-
-    console.log(bookings);
-
+console.log(bookings);
     return (
         <div>
             <h1 className="text-3xl mb-8">My Appointment</h1>
@@ -36,16 +34,25 @@ const MyAppoinment = () => {
                             <th>Treatment</th>
                             <th>data</th>
                             <th>Time</th>
+                            <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            bookings.map((booking, i) => <tr key={booking._id}>
+                            bookings?.length && bookings.map((booking, i) => <tr key={booking._id}>
                                 <th>{i+1}</th>
                                 <td>{booking.pasitont}</td>
                                 <td>{booking.treatmant}</td>
                                 <td>{booking.appointmentDate}</td>
                                 <td>{booking.slot}</td>
+                                {
+                                    booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}>
+                                    <button className='btn btn-secondary btn-sm'>Pay</button>
+                                    </Link>
+                                }
+                                {
+                                 booking.price && booking.paid && <span className='text-green-500'>Paid</span>
+                                }
                             </tr>)
                         }
                     </tbody>
